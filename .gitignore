@@ -1,3 +1,9 @@
+answer/
+test/
+a.exe
+
+__pycache__
+
 # Created by https://www.gitignore.io/api/pycharm
 
 ### PyCharm ###
