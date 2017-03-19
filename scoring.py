@@ -49,6 +49,8 @@ def check_problem(number):
 
         output, err = subprocess.Popen('a.exe', stdin=prob_input, stdout=subprocess.PIPE).communicate()
         program_output = output.decode().replace('\r\n', '\n').strip()
+        prob_input.seek(0)
+        input_str = prob_input.read()
         answer_str = prob_output.read()
 
         prob_input.close()
@@ -57,7 +59,8 @@ def check_problem(number):
         if program_output == answer_str:
             print('테스트 케이스 %d 통과' % (i + 1))
         else:
-            raise Exception('테스트 케이스 %d 오답' % (i + 1))
+            raise Exception('테스트 케이스 %d 오답\n' % (i + 1) +
+                            '[입력]\n%s\n\n[정답]\n%s\n\n[프로그램의 출력값]\n%s\n\n' % (input_str, answer_str, program_output))
 
 
     print('%d번 문제 정답\n\n' % number)
