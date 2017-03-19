@@ -62,15 +62,23 @@ def check_problem(number):
             raise Exception('테스트 케이스 %d 오답\n' % (i + 1) +
                             '[입력]\n%s\n\n[정답]\n%s\n\n[프로그램의 출력값]\n%s\n\n' % (input_str, answer_str, program_output))
 
-
     print('%d번 문제 정답\n\n' % number)
 
+
+RESULT = [None] * 11
 
 # 채점 시작
 for i in range(1, PROBLEM_COUNT + 1):
     # i번째 문제 채점
     try:
         check_problem(i)
+        RESULT[i] = 'O'
     except Exception as e:
         wrong_answer(i, str(e))
+        RESULT[i] = 'X'
 
+# 결과를 요약하여 출력
+print("========== 요약 ==========")
+print("O: 정답, X: 오답")
+for i in range(1, 10):
+    print('%d. [%s]' % (i, RESULT[i]), end='  /  ')
