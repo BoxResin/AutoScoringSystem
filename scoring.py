@@ -33,7 +33,7 @@ def check_problem(number):
         raise Exception('%d.c 소스코드가 없습니다.' % number)
 
     # i번째 소스코드 컴파일
-    subprocess.run('gcc %s' % code_path)
+    subprocess.run('gcc -std=%s %s' % (COMPILER, code_path))
 
     # 컴파일 실패했는지 확인
     if not os.path.exists('a.exe'):
@@ -65,7 +65,7 @@ def check_problem(number):
     print('%d번 문제 정답\n\n' % number)
 
 
-RESULT = [None] * 11
+RESULT = [None] * (PROBLEM_COUNT + 1)
 
 # 채점 시작
 for i in range(1, PROBLEM_COUNT + 1):
@@ -80,5 +80,5 @@ for i in range(1, PROBLEM_COUNT + 1):
 # 결과를 요약하여 출력
 print("========== 요약 ==========")
 print("O: 정답, X: 오답")
-for i in range(1, 10):
+for i in range(1, PROBLEM_COUNT + 1):
     print('%d. [%s]' % (i, RESULT[i]), end='  /  ')
