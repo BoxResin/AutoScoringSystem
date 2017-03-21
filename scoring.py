@@ -67,6 +67,9 @@ def check_problem(number):
             print('테스트 케이스 %d 오답\n' % (i + 1) +
                   '[입력]\n%s\n\n[정답]\n%s\n\n[프로그램의 출력값]\n%s\n\n' % (input_str, answer_str, program_output))
 
+    if score == 0:
+        raise Exception('테스트 케이스 모두 틀림')
+
     return score
 
 
