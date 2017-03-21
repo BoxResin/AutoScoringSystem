@@ -43,6 +43,8 @@ def check_problem(number):
     inputs = glob.glob('answer/%d_input*.txt' % number)
     outputs = glob.glob('answer/%d_output*.txt' % number)
 
+    ok = True
+
     for i in range(len(inputs)):
         prob_input = open(inputs[i], 'r')
         prob_output = open(outputs[i], 'r')
@@ -59,8 +61,12 @@ def check_problem(number):
         if program_output == answer_str:
             print('테스트 케이스 %d 통과' % (i + 1))
         else:
-            raise Exception('테스트 케이스 %d 오답\n' % (i + 1) +
-                            '[입력]\n%s\n\n[정답]\n%s\n\n[프로그램의 출력값]\n%s\n\n' % (input_str, answer_str, program_output))
+            ok = False
+            print('테스트 케이스 %d 오답\n' % (i + 1) +
+                  '[입력]\n%s\n\n[정답]\n%s\n\n[프로그램의 출력값]\n%s\n\n' % (input_str, answer_str, program_output))
+
+    if not ok:
+        raise Exception('테스트 케이스 일부 오답')
 
     print('%d번 문제 정답\n\n' % number)
 
